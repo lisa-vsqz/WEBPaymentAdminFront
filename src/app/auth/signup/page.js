@@ -5,22 +5,33 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function SignUp() {
-  const [firstName, setFirstName] = useState(''); // Agregar campos necesarios
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [role, setRole] = useState('client');
+  const [firstName, setFirstName] = useState(""); // Agregar campos necesarios
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [role, setRole] = useState("client");
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Llama a tu API para crear un nuevo usuario
-    const res = await fetch("http://localhost:5000/api/users", { // Cambia la URL según tu API
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ firstName, lastName, email, password, phoneNumber, role }),
-    });
+    const res = await fetch(
+      "https://webpaymentbackend-production.up.railway.app/api/users",
+      {
+        // Cambia la URL según tu API
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          password,
+          phoneNumber,
+          role,
+        }),
+      }
+    );
 
     if (res.ok) {
       router.push("/auth/signin");
@@ -101,7 +112,9 @@ export default function SignUp() {
           </select>
         </div>
 
-        <button type="submit" className="signup-button">Registrarse</button>
+        <button type="submit" className="signup-button">
+          Registrarse
+        </button>
       </form>
     </div>
   );

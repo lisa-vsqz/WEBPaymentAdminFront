@@ -5,6 +5,7 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+const CLIENT_URL = process.env.NEXT_PUBLIC_CLIENT_FRONT_URL;
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -22,9 +23,9 @@ export default function SignIn() {
 
     if (res?.ok) {
       if (session?.user.role === "admin") {
-        router.push("http://localhost:3000/business_payments"); // Admin's initial route
+        router.push(`${CLIENT_URL}/business_payments`); // Admin's initial route
       } else if (session?.user.role === "client") {
-        router.push("http://localhost:3000/business_payments"); // Client's initial route
+        router.push(`${CLIENT_URL}/business_payments`); // Client's initial route
       }
     } else {
       alert("Credenciales inválidas");
@@ -37,7 +38,10 @@ export default function SignIn() {
 
   return (
     <div className="sign-in-form flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-full max-w-md">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-8 rounded shadow-md w-full max-w-md"
+      >
         <h1 className="text-2xl font-bold mb-6 text-center">Iniciar Sesión</h1>
         <label className="block mb-4">
           <span className="text-gray-700">Correo electrónico:</span>
