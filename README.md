@@ -1,6 +1,7 @@
 # CRUD MVC Project
 
 ## Table of Contents
+
 - [Overview](#overview)
 - [Features](#features)
 - [Technologies](#technologies)
@@ -8,7 +9,6 @@
 - [Setup and Installation](#setup-and-installation)
 - [Usage](#usage)
 - [API Endpoints](#api-endpoints)
-- [Screenshots](#screenshots)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -16,144 +16,128 @@
 
 ## Overview
 
-This project is a **CRUD (Create, Read, Update, Delete)** web application built using the **MVC (Model-View-Controller)** architectural pattern. It provides a simple interface to manage resources (e.g., users, products, or tasks) and interact with a database. 
+This project is a **CRUD (Create, Read, Update, Delete)** web application built using the **MVC (Model-View-Controller)** architectural pattern. It provides a simple interface to manage resources (e.g., users, products, or tasks) and interact with a database.
 
-Users can create new records, view existing records, update them, and delete them, all via an intuitive web interface. The project is designed with separation of concerns in mind, where:
-- **Models** manage data and database operations.
-- **Views** handle the presentation of the data.
-- **Controllers** manage user input and interact with models and views.
+The **Admin Frontend** is a web application built with **Next.js** that provides CRUD (Create, Read, Update, Delete) operations for managing all database tables. It features a user-friendly interface, authentication, and integration with a backend API. This tool is designed for administrators to manage data efficiently with a focus on usability and performance.
 
 ## Features
 
-- **Create, Read, Update, Delete (CRUD)** operations
-- **Responsive** user interface using **Bootstrap**
-- **Database integration** to store and manage data
-- **Validation** for input fields to ensure data integrity
-- **Search functionality** to easily find records
-- **Sorting** and **pagination** for better data navigation
-- **Error handling** with user-friendly messages
-- **RESTful API** for interacting with the system programmatically
+- **CRUD Operations** for all tables in the database.
+- **Authentication** using NextAuth.js.
+- **Responsive Design** with Tailwind CSS.
+- **Modular Components** for form generation and table rendering.
+- **Role-Based Access Control** to restrict access to administrative functions.
+- **Seamless Backend Integration** via RESTful APIs.
 
 ## Technologies
 
-- **Backend**: ASP.NET Core MVC (Model-View-Controller)
-- **Frontend**: HTML5, CSS3, JavaScript, Bootstrap
-- **Database**: SQL Server
-- **ORM**: Entity Framework Core
-- **Tools**: Visual Studio, SQL Server Management Studio (SSMS)
+- **Framework**: Next.js
+- **State Management**: React
+- **Styling**: Tailwind CSS
+- **Authentication**: NextAuth.js
+- **Icons**: react-icons
+- **Build Tool**: Vercel (Next.js built-in support)
+- **Linting**: ESLint
 
 ## Architecture
 
-The project follows the **MVC** architecture, which ensures a clean separation of concerns between the application's data, user interface, and control logic.
+This project is a **frontend-only** application built on a component-based architecture. The key components include:
 
-- **Model**: Represents the data and the business logic. Interacts with the database using Entity Framework Core.
-- **View**: Handles the presentation layer and displays data from the model to the user.
-- **Controller**: Manages user input and passes data between the view and the model.
+- **Reusable Components**: Shared UI components such as forms, tables, and modals.
+- **Pages**: Next.js pages corresponding to CRUD operations for each table.
+- **API Integration**: Interacts with backend APIs to fetch and manipulate data.
+- **Authentication**: Handles login and session management with NextAuth.js.
 
-```plaintext
-┌───────────┐       ┌─────────┐        ┌────────────┐
-│   Model   │ <---> │Controller│ <----> │   View     │
-└───────────┘       └─────────┘        └────────────┘
-   (Data)           (Business Logic)     (UI/UX)      
-```
 ## Setup and Installation
 
 ### Prerequisites
 
-- [.NET SDK](https://dotnet.microsoft.com/download) (version 6.0 or later)
-- [SQL Server](https://www.microsoft.com/en-us/sql-server) or any compatible SQL database
-- [Visual Studio](https://visualstudio.microsoft.com/) or [Visual Studio Code](https://code.visualstudio.com/)
-- Optional: [Docker](https://www.docker.com/) for containerization
+- **Node.js**: Install from [nodejs.org](https://nodejs.org/)
+- **npm**: Comes with Node.js
+- **Backend**: Ensure the backend is running and accessible
 
 ### Steps
 
-1. **Clone the repository**:
-    ```bash
-    git clone https://github.com/yourusername/crud-mvc-project.git
-    cd crud-mvc-project
-    ```
+1. **Clone the Repository**
 
-2. **Configure the database**:
-    - Update the `appsettings.json` file with your SQL Server connection string:
-      ```json
-      "ConnectionStrings": {
-        "DefaultConnection": "Server=YOUR_SERVER_NAME;Database=YOUR_DB_NAME;Trusted_Connection=True;MultipleActiveResultSets=true"
-      }
-      ```
+   ```bash
+   git clone https://github.com/yourusername/admin-frontend.git
+   cd admin-frontend
+   ```
 
-3. **Run database migrations**:
-    - Use Entity Framework to create the database and apply migrations:
-      ```bash
-      dotnet ef database update
-      ```
+2. **Install Dependencies**
 
-4. **Run the application**:
-    ```bash
-    dotnet run
-    ```
+   ```bash
+   npm install
+   ```
 
-5. **Access the app**:
-    - Open your browser and go to `https://localhost:5001` (or the port specified by your local setup).
+3. **Configure Environment Variables**
+
+   - Create a `.env.local` file in the root directory:
+     ```env
+     NEXTAUTH_URL=http://localhost:3000
+     NEXTAUTH_SECRET=your_secret_key
+     BACKEND_API_URL=http://localhost:4000
+     ```
+
+4. **Run the Development Server**
+
+   ```bash
+   npm run dev
+   ```
+
+5. **Build for Production**
+
+   ```bash
+   npm run build
+   npm start
+   ```
+
+6. **Access the App**
+   - Open your browser and go to `http://localhost:3000` (default port).
 
 ---
 
 ## Usage
 
-Once the project is running, you can use the web interface to perform the following operations:
+Once the app is running, administrators can log in to access the dashboard. The app provides CRUD functionality for all tables with features like:
 
-- **Create**: Add a new record (e.g., user, product, task) via a form.
-- **Read**: View a list of all records stored in the database.
-- **Update**: Modify existing records using an edit form.
-- **Delete**: Remove records from the system.
+- **Table Views**: List all records with pagination.
+- **Create**: Add new records via dynamic forms.
+- **Read**: View details of a specific record.
+- **Update**: Edit existing records.
+- **Delete**: Remove records with confirmation prompts.
 
-### Run in Docker
-
-To run the project in a Docker container, use the following commands:
-```bash
-docker build -t crud-mvc-app .
-docker run -p 8080:80 crud-mvc-app
-```
 ## API Endpoints
 
-The project exposes a set of RESTful API endpoints for programmatic interaction.
+The application interacts with the backend using the following API endpoints:
 
-- **GET /api/records**: Retrieve a list of all records
-- **GET /api/records/{id}**: Retrieve a single record by ID
-- **POST /api/records**: Create a new record
-- **PUT /api/records/{id}**: Update an existing record
-- **DELETE /api/records/{id}**: Delete a record
+- **Users**
 
-Example API usage:
-```bash
-curl -X GET https://localhost:5001/api/records
-```
+  - **GET** `/api/users`: Fetch all users
+  - **POST** `/api/users`: Create a new user
+  - **PUT** `/api/users/:id`: Update user details
+  - **DELETE** `/api/users/:id`: Delete a user
+
+- **Additional Endpoints**
+  - Similar CRUD routes exist for all database tables (e.g., Invoices, Providers, Payments).
+
+Make sure the backend is running and accessible at the URL defined in your `.env.local` file.
 
 ---
 
-### Screenshots
-```markdown
-## Screenshots
-
-### Dashboard (List View)
-![Dashboard](screenshots/dashboard.png)
-
-### Create Form
-![Create Form](screenshots/create-form.png)
-
-### Edit Form
-![Edit Form](screenshots/edit-form.png)
-```
 ## Contributing
 
-If you would like to contribute to this project, feel free to fork the repository and submit a pull request. Any contributions, including bug fixes, new features, or documentation improvements, are highly appreciated.
+Contributions are welcome! If you'd like to enhance this project, please follow these steps:
 
-### Steps to contribute:
-1. Fork the repo.
-2. Create your feature branch: `git checkout -b feature/your-feature`.
+1. Fork the repository.
+2. Create a feature branch: `git checkout -b feature/your-feature`.
 3. Commit your changes: `git commit -m 'Add feature'`.
 4. Push to the branch: `git push origin feature/your-feature`.
 5. Open a pull request.
-   
+
+All contributions, including bug fixes, new features, and documentation improvements, are appreciated.
+
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
